@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>旅人日记</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/travel.css"/>
+	</head>
+	<body onscroll="page_scroll()">
+		<div class="jindutiao">
+			<p>PAGE</p>
+			<ul class="jindutiao_ul">
+				<li id="jindutiao_li" class="jindutiao_li"></li>
+			</ul>
+		</div>
+		<div class="menu">
+			<a href="#">HOMEPAGE</a>
+			<a href="#">INTRODUCTION</a>
+			<a href="#">UPCOMING</a>
+			<a href="#">CONTACT</a>
+		</div>
+		<div class="pic_show">
+			<div id="pic_move" class="pic_move"></div>
+			<div class="pic_board">
+				<p class="pic_title">南京/Travel</p>
+			</div>
+		</div>
+		<!-- 去的原因 -->
+		<div class="why">
+			<div class="why_container">
+				<h3>REASON</h3>
+				<p class="why_normal normal_yingwen">
+					This is the year of no doubt, of course, to take advantage of the present to enjoy life,
+					 usually we always find a Starbucks or Coffee Gaulle while tapping the code to enjoy this feeling,
+					  while discussing how to solve this bug, while cherishing the present time. 
+					  But we think that we are a junior, but we haven't been to many places yet, 
+					  so we decided to make good use of our holiday time and go to a city before we go back.Let's go.
+				</p>
+				<p class="why_normal normal_zhongwen">
+					本就是不惑之年，当然是要趁现在好好享受生活了，平时的我们总是找个星巴克或者高乐雅咖啡一边敲代码一边享受这这种感觉，一边讨论如何解决这个bug，
+					一边好好珍惜现在时光。但我们想着已经大三了，却还没有去过很多地方，所以决定好好利用放假的时间，在回去之前先去一座城市看看。
+				</p>
+				<p class="why_biaoyu"><span class="color_orange">"</span>这生活本就是场旅行<span class="color_orange">"</span></p>
+			</div>
+		</div>
+		<!-- 过程 -->
+		<div class="guocheng">
+			<div id="big_pic" class="guocheng_img_biggest">
+				<div id="biggest_board" class="biggest_board"></div>
+			</div>
+			<div id="small_pic" class="guocheng_img_small">
+				<div id="small_board" class="small_board"></div>
+			</div>
+			<div id="guocheng_wenzi" class="guocheng_wenzi">
+				<p id="wenzi_p1" class="guocheng_wenzi_p1">第一天</p>
+				<p id="wenzi_p2" class="guocheng_wenzi_p2">到达南京，到达所住的青旅</p>
+			</div>
+		</div>
+		<div class="zongjie">
+			<p>一段<span class="color_orange">旅程</span>的结束代表一段<span class="color_orange">新的旅程</span>即将开始<span style="animation-delay: 0s;" class="dududu">.</span><span style="animation-delay: 0.3s;" class="dududu">.</span><span style="animation-delay: 0.6s;" class="dududu">.</span></p>
+		</div>
+		<script>
+			window.onload = function() {
+				showpcimg();
+				var pic_timer;
+				var pic_num = 1;
+				var pic_move = document.getElementById("pic_move")
+				pic_timer = setInterval(function() {
+					if(pic_num == 5 ) {
+						pic_num = 0
+					}
+					pic_num++;
+					pic_move.style.backgroundImage = "url(./img/travel/travel"+ pic_num +".jpg)"
+				},3000)
+			}
+			// 滚动事件
+			function page_scroll() {
+				var H_screen = window.screen.height;
+				var H_scroll = document.documentElement.scrollTop;
+				var jindutiao_li = document.getElementById("jindutiao_li")
+				var small_pic = document.getElementById("small_pic")
+				if(H_scroll <= H_screen * 0.35) {
+					jindutiao_li.style.top = 0;
+				}
+				else if(H_scroll <= H_screen * 1.30 ) {
+					jindutiao_li.style.top = 130 + 'px';
+				}
+				else if(H_scroll <= H_screen * 2.1 ) {
+					jindutiao_li.style.top = 260 + 'px';
+				}
+				else {
+					jindutiao_li.style.top = 390 + 'px';
+				}
+				
+			}
+			// page3自动切换图片事件
+			function showpcimg() {
+				var guocheng_num = 1;
+				var text1;
+				var text2;
+				setInterval(function(){
+					if(guocheng_num === 4) {
+						guocheng_num = 1;
+					}
+					else {
+						guocheng_num++;
+					}
+					switch(guocheng_num) {
+						case 1: text1 = "第一天";
+							text2 = "到达南京，到达所住的青旅";
+							break;
+						case 2: text1 = "第二天";
+							text2 = "逛南京大学，后来在书店呆了一天";
+							break;
+						case 3: text1 = "第三天";
+							text2 = "早起逛博物馆，拍了很多照片";
+							break;
+						default : text1 = "第四天";
+							text2 = "离开总是忧愁的，选择在酒吧度过"
+					}
+					var small = document.getElementById("small_board")
+					var big = document.getElementById("biggest_board")
+					var small_pic = document.getElementById("small_pic")
+					var big_pic = document.getElementById("big_pic")
+					var wenzi_div = document.getElementById("guocheng_wenzi")
+					var p1 = document.getElementById("wenzi_p1")
+					var p2 = document.getElementById("wenzi_p2")
+					small.style.opacity = 1;
+					big.style.opacity = 1;
+					small.style.left = 0
+					big.style.marginLeft = 0;
+					wenzi_div.style.opacity = 0;
+					setTimeout(function() {
+						small_pic.style.backgroundImage = "url(img/travel/guocheng-small"+ guocheng_num +".jpg)";
+						big_pic.style.backgroundImage = "url(img/travel/guocheng-big"+ guocheng_num +".jpg)";
+						small.style.left = 100 + "%";
+						big.style.marginLeft = 100 + "%";
+						p1.innerHTML = text1;
+						p2.innerHTML = text2;
+						wenzi_div.style.opacity = 1;
+					},700)
+					setTimeout(function() {
+						small.style.opacity = 0;
+						big.style.opacity = 0;
+						small.style.left = -101 + "%";
+						big.style.marginLeft = -101 + "%";
+					},1200)
+				},5000)
+			}
+		</script>
+	</body>
+</html>
