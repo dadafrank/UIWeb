@@ -1,4 +1,4 @@
-FROM node:14.17.0
+FROM node:12.14.1
 COPY . /app
 WORKDIR /app
 EXPOSE 8884
